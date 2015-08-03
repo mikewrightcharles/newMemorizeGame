@@ -1,0 +1,136 @@
+html,body{
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+    text-align: center;
+}
+.info{
+    width:500px;
+    margin:0 auto 0 auto;
+    height:100px;
+    text-align: center;
+}
+.container{
+    width:800px;
+    height:100%;
+    margin:0 auto 0 auto;    
+    background:#fff;
+    text-align:center;
+}
+.gameBoard{
+    background:#f2f2f2;
+    margin:0 auto 0 auto;
+    padding:auto;
+    height:auto;
+    width:535px;
+}
+.piece{
+    font-family: 'News Cycle', sans-serif;
+    width:130px;
+    height:80px;
+    background:#272727;
+    text-align:center;
+    padding-top:45px;
+    color:#fff;
+    font-size:18px;
+    float:left;
+    margin:3px 3px 0 0px;
+    cursor:pointer;
+}
+.piece .subclass{
+
+}
+
+.messageBox{
+    width:500px;
+    margin:0 auto 0 auto;
+    height:100px;
+    text-align: center;   
+}
+
+input[type=range].slider {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 4px 0;
+}
+input[type=range].slider:focus {
+  outline: none;
+}
+input[type=range].slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    background: #b1ced6;
+    border-radius: 0px;
+    border: 0px solid #010101;
+}
+input[type=range].slider::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+    border: 0px solid rgba(0, 0, 0, 0.57);
+    height: 40px;
+    width: 15px;
+    border-radius: 0px;
+    background: #83a3b2;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+input[type=range].slider:focus::-webkit-slider-runnable-track {
+    background: #c5dbe1;
+}
+input[type=range].slider::-moz-range-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+    background: #b1ced6;
+    border-radius: 0px;
+    border: 0px solid #010101;
+}
+input[type=range].slider::-moz-range-thumb {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+    border: 0px solid rgba(0, 0, 0, 0.57);
+    height: 40px;
+    width: 15px;
+    border-radius: 0px;
+    background: #83a3b2;
+    cursor: pointer;
+}
+input[type=range].slider::-ms-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range].slider::-ms-fill-lower {
+    background: #9dc1cb;
+    border: 0px solid #010101;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range].slider::-ms-fill-upper {
+    background: #b1ced6;
+    border: 0px solid #010101;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range].slider::-ms-thumb {
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+    border: 0px solid rgba(0, 0, 0, 0.57);
+    height: 40px;
+    width: 15px;
+    border-radius: 0px;
+    background: #83a3b2;
+    cursor: pointer;
+    height: 32px;
+}
+input[type=range].slider:focus::-ms-fill-lower {
+    background: #b1ced6;
+}
+input[type=range].slider:focus::-ms-fill-upper {
+    background: #c5dbe1;
+}
