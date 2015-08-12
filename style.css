@@ -44,9 +44,18 @@ html,body{
 
 .messageBox{
     width:500px;
-    margin:0 auto 0 auto;
+    margin:50px auto 0 auto;
     height:100px;
     text-align: center;   
+}
+#rows{
+    margin-right: 15px;    
+}
+#difficulty{
+    margin-right: 15px;    
+}
+#timer{
+    margin-right: 15px;
 }
 
 input[type=range].slider {
@@ -134,3 +143,5 @@ input[type=range].slider:focus::-ms-fill-lower {
 input[type=range].slider:focus::-ms-fill-upper {
     background: #c5dbe1;
 }
+
+

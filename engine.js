@@ -1,26 +1,20 @@
 window.onload = function(){
 
-//Things to work on:
-//-Add start button
-//-After start is pressed show numbers
-//-hide numbers and start counter
-
-buildCanvasSize(16);
-
+    buildCanvasSize(16);
 
 };
-
-//Global scope
-//var numberOfBlocks;
-//var finalSet;
-
 
 var newBoard;
 var newGame;
 var testSTR;
 
 function engineOn(){
+
+   delete newSystem;
+   delete newGame;
+
    var numberOfBlocks = $("#rows").html();
+   buildCanvasSize(numberOfBlocks);
    var divCanvas = document.getElementById('gameCanvas');
 
    var newSystem = new createNumberSystem(numberOfBlocks, divCanvas);
@@ -28,12 +22,14 @@ function engineOn(){
    
    newGame = new startGame(numberOfBlocks, newSystem.getFinalSet());
    newGame.engineStart();
- //  document.getElementById('5').addEventListener('click', newGame.whenClicked());
+
 }
 
 
 //on input bar change
 $("#points").on("input change", function(){ 
+    delete newSystem;
+    delete newGame;    
     buildCanvasSize(this.value); 
 });
 
@@ -128,8 +124,6 @@ function createNumberSystem(sizeOfCanvas, div){
         }
         return secondArray;       
     });
-
-
     this.addID = (function() {
         var divObj = this.div.querySelectorAll('div');
         for(var i = 0; i < divObj.length; i += 1) {
@@ -137,8 +131,6 @@ function createNumberSystem(sizeOfCanvas, div){
             divObj[i].innerHTML = "";
         }
     });
-
-
 }
 
 
@@ -148,10 +140,9 @@ function startGame(size, finalSet){
     this.finalSetIn = finalSet;
 
     this.engineStart = (function(){
-        this.prepare();
-                // this.effects();
-                // this.timer();
-                // this.onclickready(this.finalSetIn, this.sizeIn);           
+        this.effects();
+        this.showNumbers();
+        this.onclickready(this.finalSetIn, this.sizeIn);           
     });
 
     //add jQuery effects
@@ -172,40 +163,19 @@ function startGame(size, finalSet){
          });
     });
 
-    this.prepare = (function(){
-        $("#messageFirst").html("Try to memorize the numbers! ");
-        $("#messageSecond").html("The game will start in ");
-        var timerCount = 0;    
-        while(timerCount <= 10){
-            setInterval(function(){
-                if (timerCount > 10){
-                    $("#messageFirst").html("");
-                    $("#messageSecond").html("");
-                    $("#counterStart").html("");
-                    return;
-                }else{
-                    $("#counterStart").html(timerCount);
-                    timerCount++;
-                }
-            },1000); 
-        }
-        if(timerCount > 10){
-            this.effects();
-            this.timer();
-            this.onclickready(this.finalSetIn, this.sizeIn);                 
-        }     
-    });
+    this.showNumbers = (function(){
+        //remove and append new button
+        $("#startButton").remove();
+        var $input = $('<input type="button" value="Restart" onClick = "window.location.reload()"/>');
+        $input.appendTo($("#buttonParent"));  
 
-    this.timer = (function(){
-        var timerCount = 0;    
-        setInterval(function(){
-            if (timerCount > 15){
-                return;
-            }else{
-                $("#timer").html(timerCount);
-                timerCount++;
-            }
-        },1000);      
+        //disable slide bar
+        $("#points").prop( "disabled", true );
+
+        $("#messageFirst").html("You have 5 seconds to memorize the numbers...");
+        for(var i = 0; i < this.sizeIn; i += 1) {
+            $("#"+i).html(this.finalSetIn[i]);
+        }        
     });
 
     this.onclickready = (function(finalSetIn, sizeIn) {
@@ -217,11 +187,30 @@ function startGame(size, finalSet){
         var firstDiv = 0;
         var secondDiv = 0;          
         var firstDIVid = 0;
-        var secondDIVid = 0;        
-        for(var i = 0; i < sizeIn; i += 1) {
-            document.getElementById(i).addEventListener('click', onClickCall);
-            already[i] = null;
-        } 
+        var secondDIVid = 0;   
+        var timerCount = 0; 
+        var points = 0;   
+
+        //Clean up Canvas and add event listeners
+        var interval = setInterval(function(){
+            if (timerCount > 5){               
+                for(var i = 0; i < sizeIn; i += 1) {
+                    $("#"+i).html("");
+                }   
+                for(var i = 0; i < sizeIn; i += 1) {
+                    document.getElementById(i).addEventListener('click', onClickCall);
+                    already[i] = null;
+                }
+                $("#messageFirst").html("Now match all the numbers in 25 seconds!");
+                clearInterval(interval);
+                controller();
+                return;
+            }else{
+                $("#timer").html(timerCount);
+                timerCount++;
+            }
+        },1000);   
+
         function onClickCall(){
             clickCounter += 1;
             $("#"+this.id).html(finalSet[this.id]);
@@ -250,7 +239,8 @@ function startGame(size, finalSet){
                             $("#"+firstDIVid).css( 'background', '#f2f2f2' ); 
                             $("#"+secondDIVid).css( 'background', '#f2f2f2' );   
                             $("#"+firstDIVid).css( 'color', '#000' ); 
-                            $("#"+secondDIVid).css( 'color', '#000' );                                                                     
+                            $("#"+secondDIVid).css( 'color', '#000' );   
+                            points += 1;                                                                  
                             return;
                         }
                     }
@@ -265,6 +255,29 @@ function startGame(size, finalSet){
                 }
             }            
         }  
+
+        function controller(){
+            var intervalGame = setInterval(function(){
+                if (timerCount > 20){               
+                    for(var i = 0; i < sizeIn; i += 1) {
+                        $("#"+i).html(finalSetIn[i]);
+                    }   
+                    for(var i = 0; i < sizeIn; i += 1) {
+                        document.getElementById(i).removeEventListener('click', onClickCall);
+                        already[i] = null;
+                    }
+                    $("#messageFirst").html("Time is up! You scored <b>" + points + " points!</b>");
+                    clearInterval(intervalGame);
+                    return;
+                }else{
+                    $("#timer").html(timerCount);
+                    timerCount++;
+                }
+            },1000); 
+        }
     });
+
+
+
 }
 
