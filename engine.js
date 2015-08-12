@@ -25,15 +25,17 @@ function engineOn(){
 
 }
 
+  //---------------------//
+ //---INPUT BAR CHANGE--//
+//---------------------//
 
-//on input bar change
 $("#points").on("input change", function(){ 
     delete newSystem;
     delete newGame;    
     buildCanvasSize(this.value); 
 });
 
-//new game start
+
 function buildCanvasSize(sizeOfCanvas){
     $("#rows").text(sizeOfCanvas);
     var levelDifficulty = $("#rows").text(); 
@@ -59,7 +61,6 @@ function buildCanvasSize(sizeOfCanvas){
     newBoard.build();   
 }
 
-
   //---------------------//
  //-----BUILD CANVAS----//
 //---------------------//
@@ -82,7 +83,6 @@ function buildCanvas(sizeOfCanvas, div){
         }
     });
 }
-
 
  //------------------------------//
  //-----CREATE RANDOM NUMBERS----//
@@ -133,6 +133,9 @@ function createNumberSystem(sizeOfCanvas, div){
     });
 }
 
+  //---------------------//
+ //-- NEW GAME CONTROL--//
+//---------------------//
 
 function startGame(size, finalSet){
 
@@ -276,8 +279,5 @@ function startGame(size, finalSet){
             },1000); 
         }
     });
-
-
-
 }
 
